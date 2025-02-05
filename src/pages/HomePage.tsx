@@ -1,14 +1,6 @@
-import { useState } from "react";
-import Card from "@/components/Card";
+import TodoLists from "@/components/TodoLists";
 
 const HomePage = () => {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <h1>Vite + React</h1>
-      <Card count={count} setCountFun={setCount} />
-    </>
-  );
+  return <TodoLists />;
 };
 export default HomePage;
