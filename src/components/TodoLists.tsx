@@ -1,7 +1,5 @@
 import TodoList from "@/components/TodoList";
 import TodoListData from "@/assets/todos.json";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -12,6 +10,7 @@ import {
   SelectLabel,
 } from "@/components/ui/select";
 import DateRangePicker from "@/components/ui/date-range-picker";
+import ModifyTodo from "@/components/ModifyTodo";
 
 const TodoLists = () => {
   return (
@@ -21,12 +20,11 @@ const TodoLists = () => {
           <h2 className="text-5xl font-bold text-emerald-600 ">
             Your Todos ):
           </h2>
-          <Button className="group relative w-[140px] h-[40px] flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">
-            <Plus /> New Todo
-          </Button>
+
+          <ModifyTodo />
         </div>
 
-        <div className="flex items-center mb-10 space-x-4">
+        <div className="flex items-center mb-10 space-x-4 bg-gray-100 py-5 justify-center rounded-lg">
           <Select>
             <SelectTrigger className="w-[180px] focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-emerald-500 bg-emerald-600 text-gray-100">
               <SelectValue placeholder="Filter by Status" />
