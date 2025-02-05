@@ -123,7 +123,10 @@ const SignUp = () => {
                       <button
                         type="button"
                         className="absolute right-3 top-2 text-gray-500 hover:text-emerald-600"
-                        onClick={() => setShowPassword(!showPassword)}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          setShowPassword(!showPassword);
+                        }}
                       >
                         {showPassword ? (
                           <EyeOff size={20} />
@@ -150,6 +153,7 @@ const SignUp = () => {
                           {...field}
                           type={showConfirmPassword ? "text" : "password"}
                           placeholder="Re-enter your password"
+                          className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
                         />
                       </FormControl>
                       <button

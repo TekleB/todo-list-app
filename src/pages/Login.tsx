@@ -1,9 +1,11 @@
-import { Link,useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import {
   Form,
   FormField,
@@ -22,7 +24,7 @@ const loginSchema = z.object({
 });
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Initialize the form with default values and validation schema
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -33,10 +35,13 @@ const Login = () => {
     },
   });
 
+  // State to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
+
   // Handle form submission
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     console.log("Login Data:", data);
-    navigate('/')
+    navigate("/");
   };
 
   return (
@@ -75,14 +80,30 @@ const Login = () => {
                 render={({ field }) => (
                   <FormItem className="space-y-1">
                     <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="password"
-                        placeholder="Enter your password"
-                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
-                      />
-                    </FormControl>
+                    <div className="relative">
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                        />
+                      </FormControl>
+                      <button
+                        type="button"
+                        className="absolute right-3 top-2 text-gray-500 hover:text-emerald-600"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          setShowPassword((prev) => !prev);
+                        }}
+                      >
+                        {showPassword ? (
+                          <EyeOff size={20} />
+                        ) : (
+                          <Eye size={20} />
+                        )}
+                      </button>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
