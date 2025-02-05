@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Banner from '@/components/Banner'
 import Card from "@/components/Card";
 
 const HomePage = () => {
@@ -7,7 +6,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Banner />
       <h1>Vite + React</h1>
       <Card count={count} setCountFun={setCount} />
     </>
