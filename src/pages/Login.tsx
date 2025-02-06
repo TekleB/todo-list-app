@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import {
   Form,
   FormField,
@@ -14,6 +14,11 @@ import {
   FormLabel,
   FormControl,
 } from "@/components/ui/form";
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "@/store/slices/userApiSlice";
+import { setUserInfo } from "@/store/slices/authSlice";
+import { UserInfo, ApiError } from "@/types/index";
+import { toast } from "sonner";
 
 // Define the schema for form validation using zod
 const loginSchema = z.object({
@@ -25,6 +30,19 @@ const loginSchema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector(
+    (state: { auth: { userInfo: UserInfo } }) => state.auth
+  );
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
 
   // Initialize the form with default values and validation schema
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -39,9 +57,34 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Handle form submission
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    console.log("Login Data:", data);
-    navigate("/");
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    try {
+      const res = await login({
+        email: data.email,
+        password: data.password,
+      }).unwrap();
+
+      dispatch(setUserInfo({ ...res }));
+      navigate("/");
+    } catch (err: unknown) {
+      if ((err as ApiError).status === 404) {
+        toast.error("User not found!", {
+          description: "Please create an account!",
+        });
+        return
+      }
+
+      if ((err as ApiError).status === 401) {
+        toast.error("Username or Password is not correct!", {
+          description: "Please try again!",
+        });
+        return
+      }
+
+      toast.error("Unable to login!", {
+        description: "Please try again later!",
+      });
+    }
   };
 
   return (
@@ -125,8 +168,9 @@ const Login = () => {
                 <Button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  disabled={isLoading}
                 >
-                  Submit
+                  {isLoading ? <Loader2 className="animate-spin" /> : "Submit"}
                 </Button>
               </div>
 
