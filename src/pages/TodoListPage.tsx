@@ -37,6 +37,7 @@ const TodoListPage = () => {
   );
 
   useEffect(() => {
+    console.log("HHHHHHHHHHHHHHHHH");
     // Fetch the todo when the component mounts or id changes
     const getTodo = async () => {
       try {
@@ -53,7 +54,7 @@ const TodoListPage = () => {
         setLoading(false);
       }
     };
-
+    console.log("ggggggggg");
     getTodo();
   }, [id, userInfo.token, navigate, dispatch]);
 
@@ -70,7 +71,14 @@ const TodoListPage = () => {
   // Handle mark as completed action
   const handleMark = async () => {
     try {
-      await updateTodoById(userInfo.token, id, todo,'mark', navigate, dispatch);
+      await updateTodoById(
+        userInfo.token,
+        id,
+        todo,
+        "mark",
+        navigate,
+        dispatch
+      );
       navigate("/");
     } catch (error) {
       console.log("Error updating todo", error);
@@ -102,7 +110,7 @@ const TodoListPage = () => {
         <div className="container m-auto py-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
             <main>
-              <div className="bg-white p-6 rounded-lg shadow-md text-left">
+              <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md text-left">
                 <h1 className="text-3xl font-bold  text-emerald-700 flex ">
                   {todo?.title}
                   {todo?.status ? (
@@ -123,18 +131,20 @@ const TodoListPage = () => {
                 </h1>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+              <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md mt-6">
                 <h3 className="text-emerald-700 text-lg font-bold mb-4">
                   Description
                 </h3>
 
-                <p className="mb-4 tracking-wide">{todo?.description}</p>
+                <p className="mb-4 tracking-wide dark:text-gray-300">
+                  {todo?.description}
+                </p>
 
                 <h3 className="text-emerald-700 font-bold mb-2 tracking-wide">
                   Due Date
                 </h3>
 
-                <p className="mb-4">
+                <p className="mb-4 dark:text-gray-300">
                   {todo?.dueDate
                     ? format(new Date(todo.dueDate), "EEEE, dd, yyyy 'at' ha")
                     : "No due date"}
@@ -143,7 +153,7 @@ const TodoListPage = () => {
                   Updated At
                 </h3>
 
-                <p className="mb-4">
+                <p className="mb-4 dark:text-gray-300">
                   {todo?.updatedAt
                     ? format(new Date(todo.updatedAt), "EEEE, dd, yyyy 'at' ha")
                     : "Not updated"}
@@ -152,7 +162,7 @@ const TodoListPage = () => {
             </main>
 
             <aside>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-6">Manage Todo</h3>
                 <Dialog open={confirmMark} onOpenChange={setConfirmMark}>
                   <DialogTrigger asChild>

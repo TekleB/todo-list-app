@@ -22,3 +22,5 @@ export interface Todo {
 }
 
 export type UpdateAPIAction  = 'mark' | 'update'
+
+export type DarkMode = 'system' | 'light' | 'dark'

@@ -128,8 +128,8 @@ const ModifyTodo = ({
     >
       <DialogTrigger asChild>
         <Button
-          disabled={ todo && !todo.status}
-          className={`group relative  h-[40px] flex justify-center  px-4  text-base   text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none  ${
+          disabled={todo && !todo.status}
+          className={`group relative  h-[40px] flex justify-center  px-4  text-base   text-white dark:text-gray-50 bg-emerald-600 hover:bg-emerald-700 focus:outline-none   ${
             todo
               ? "w-full focus:shadow-outline rounded-full font-bold mt-4"
               : "w-[140px]focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 py-2 rounded-md border border-transparent font-medium"
@@ -164,7 +164,7 @@ const ModifyTodo = ({
                         {...field}
                         id="title"
                         placeholder="Enter title"
-                        className="col-span-3 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                        className="col-span-3 border-gray-300 placeholder-gray-500 text-gray-900 dark:text-gray-200  focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-500 dark:focus:border-emerald-500 focus:z-10 sm:text-sm"
                       />
                     </FormControl>
                     <div></div>
@@ -187,7 +187,7 @@ const ModifyTodo = ({
                         {...field}
                         id="description"
                         placeholder="Type your description here."
-                        className="col-span-3 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                        className="col-span-3 border-gray-300 placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-500 dark:focus:border-emerald-500 focus:z-10 sm:text-sm"
                       />
                     </FormControl>
                     <FormMessage />
@@ -220,7 +220,7 @@ const ModifyTodo = ({
             <DialogFooter>
               <Button
                 type="submit"
-                className="border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 w-[90px]"
+                className="border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-emerald-500 w-[90px] "
                 disabled={loading}
               >
                 {loading ? <Loader2 className="animate-spin" /> : "Save"}

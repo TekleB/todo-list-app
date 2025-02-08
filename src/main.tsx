@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+//import { StrictMode } from "react";
 import { BrowserRouter } from "react-router";
 import { createRoot } from "react-dom/client";
 import store from "@/store/index";
@@ -9,9 +9,9 @@ import App from "@/App.tsx";
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <BrowserRouter>
-      <StrictMode>
+      {/* <StrictMode> */}
         <App />
-      </StrictMode>
+      {/* </StrictMode> */}
     </BrowserRouter>
   </Provider>
 );
