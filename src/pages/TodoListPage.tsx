@@ -36,9 +36,8 @@ const TodoListPage = () => {
     (state: { auth: { userInfo: UserInfo } }) => state.auth
   );
 
+  // Fetch the todo when the component mounts or id changes
   useEffect(() => {
-    console.log("HHHHHHHHHHHHHHHHH");
-    // Fetch the todo when the component mounts or id changes
     const getTodo = async () => {
       try {
         const data = await fetchTodoById(
@@ -54,7 +53,7 @@ const TodoListPage = () => {
         setLoading(false);
       }
     };
-    console.log("ggggggggg");
+
     getTodo();
   }, [id, userInfo.token, navigate, dispatch]);
 
