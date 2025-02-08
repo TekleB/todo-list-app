@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router";
 import { useSelector } from "react-redux";
-import { UserInfo } from "@/types/index";
+import { UserInfo } from "@/types";
 
 const ProtectedLayout = () => {
   const { userInfo } = useSelector(

@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "@/store/slices/userApiSlice";
 import { setUserInfo } from "@/store/slices/authSlice";
-import { UserInfo, ApiError } from "@/types/index";
+import { UserInfo, ApiError } from "@/types";
 import { toast } from "sonner";
 
 // Define the schema for form validation using zod
@@ -74,7 +74,7 @@ const Login = () => {
         return
       }
 
-      if ((err as ApiError).status === 401) {
+      if ((err as ApiError).status === 403) {
         toast.error("Username or Password is not correct!", {
           description: "Please try again!",
         });
