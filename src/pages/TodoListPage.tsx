@@ -87,7 +87,11 @@ const TodoListPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center mt-16">
-        <Loader2 className="animate-spin text-emerald-600" size={70} />
+        <Loader2
+          data-testid="loading-spinner"
+          className="animate-spin text-emerald-600"
+          size={70}
+        />
       </div>
     );
   }
@@ -139,20 +143,32 @@ const TodoListPage = () => {
                   {todo?.description}
                 </p>
 
-                <h3 className="text-emerald-700 font-bold mb-2 tracking-wide">
+                <h3
+                  id="due-date"
+                  className="text-emerald-700 font-bold mb-2 tracking-wide"
+                >
                   Due Date
                 </h3>
 
-                <p className="mb-4 dark:text-gray-300">
+                <p
+                  aria-labelledby="due-date"
+                  className="mb-4 dark:text-gray-300"
+                >
                   {todo?.dueDate
                     ? format(new Date(todo.dueDate), "EEEE, dd, yyyy 'at' ha")
                     : "No due date"}
                 </p>
-                <h3 className="text-emerald-700 font-bold mb-2 tracking-wide">
+                <h3
+                  id="updated-at"
+                  className="text-emerald-700 font-bold mb-2 tracking-wide"
+                >
                   Updated At
                 </h3>
 
-                <p className="mb-4 dark:text-gray-300">
+                <p
+                  aria-labelledby="updated-at"
+                  className="mb-4 dark:text-gray-300"
+                >
                   {todo?.updatedAt
                     ? format(new Date(todo.updatedAt), "EEEE, dd, yyyy 'at' ha")
                     : "Not updated"}

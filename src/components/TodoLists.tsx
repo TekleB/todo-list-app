@@ -131,6 +131,7 @@ const TodoLists = () => {
       <div className="container-xl lg:container m-auto">
         {loading ? (
           <Loader2
+            data-testid="loading-spinner"
             className="animate-spin mt-16 mx-auto text-emerald-600 dark:text-emerald-500"
             size={70}
           />
