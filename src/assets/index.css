@@ -4,7 +4,6 @@
 
 #root {
   margin: 0 auto;
-  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
 }
 
 @layer base {
@@ -71,4 +70,3 @@
     @apply bg-background text-foreground;
   }
 }
-

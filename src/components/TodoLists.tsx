@@ -76,21 +76,21 @@ const TodoLists = () => {
       <div className="container-xl lg:container m-auto">
         {loading ? (
           <Loader2
-            className="animate-spin mt-16 mx-auto text-emerald-600"
+            className="animate-spin mt-16 mx-auto text-emerald-600 dark:text-emerald-500"
             size={70}
           />
         ) : (
           <>
             <div className="flex justify-between items-center mb-10">
-              <h2 className="text-3xl font-bold text-emerald-600 sm:text-5xl">
-                Your Todos ):
+              <h2 className="text-3xl font-bold text-emerald-600 sm:text-5xl dark:text-emerald-500">
+                Your Todos :)
               </h2>
               <ModifyTodo onCreateUpdateTodo={handleNewTodo} />
             </div>
 
-            <div className="flex items-center mb-10 gap-4  bg-gray-100 py-5 justify-center rounded-lg flex-wrap">
+            <div className="flex items-center mb-10 gap-4  bg-gray-100 dark:bg-slate-800 py-5 justify-center rounded-lg flex-wrap">
               <Select onValueChange={handleSortChange}>
-                <SelectTrigger className="w-[180px] focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-emerald-500 bg-emerald-600 text-gray-100">
+                <SelectTrigger className="w-[180px] focus:outline-none  bg-emerald-600 text-gray-100 focus:ring-transparent">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
@@ -109,7 +109,7 @@ const TodoLists = () => {
                 </SelectContent>
               </Select>
               <Select>
-                <SelectTrigger className="w-[180px] focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-emerald-500 bg-emerald-600 text-gray-100">
+                <SelectTrigger className="w-[180px] focus:outline-none focus:ring-transparent bg-emerald-600 text-gray-100">
                   <SelectValue placeholder="Filter by Status" />
                 </SelectTrigger>
                 <SelectContent className="">

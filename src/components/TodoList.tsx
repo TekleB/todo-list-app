@@ -11,7 +11,7 @@ import { format } from "date-fns";
 
 const TodoList = ({ todo }: { todo: Todo }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md relative w-[85%] md:w-full transform transition duration-300 hover:scale-110 hover:shadow-xl cursor-pointer">
+    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-md relative w-[85%] md:w-full transform transition duration-300 hover:scale-110 hover:shadow-xl cursor-pointer">
       <div className="p-4">
         <div className="mb-6 flex flex-row justify-between items-center">
           <h3
@@ -46,11 +46,11 @@ const TodoList = ({ todo }: { todo: Todo }) => {
         <div className="border border-gray-100 mb-5"></div>
 
         <div className="flex flex-col  justify-between mb-4">
-          <div className="text-gray-600 mb-3 font-extralight tracking-wide">
+          <div className="text-gray-600 dark:text-gray-400 mb-3 font-extralight tracking-wide">
             <span className="font-medium">Due Date :- </span>
             {format(new Date(todo.dueDate), "EEEE, dd, yyyy 'at' ha")}
           </div>
-          <div className="text-gray-600 mb-3 font-extralight tracking-wide">
+          <div className="text-gray-600 dark:text-gray-400 mb-3 font-extralight tracking-wide">
             <span className="font-medium">Updated At :- </span>
             {format(new Date(todo.updatedAt), "EEEE, dd, yyyy 'at' ha")}
           </div>

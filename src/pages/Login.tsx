@@ -71,14 +71,14 @@ const Login = () => {
         toast.error("User not found!", {
           description: "Please create an account!",
         });
-        return
+        return;
       }
 
       if ((err as ApiError).status === 403) {
         toast.error("Username or Password is not correct!", {
           description: "Please try again!",
         });
-        return
+        return;
       }
 
       toast.error("Unable to login!", {
@@ -90,8 +90,8 @@ const Login = () => {
   return (
     <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-4">
       <div className="mt-8 mx-auto w-full sm:max-w-lg max-w-md">
-        <div className="bg-white py-8 px-4 shadow rounded-lg sm:px-10">
-          <h2 className="mb-6 text-center text-3xl font-extrabold text-emerald-600">
+        <div className="bg-white dark:bg-slate-800 py-8 px-4 shadow rounded-lg sm:px-10">
+          <h2 className="mb-6 text-center text-3xl font-extrabold text-emerald-600 dark:text-emerald-500">
             Sign in
           </h2>
           <Form {...form}>
@@ -108,7 +108,9 @@ const Login = () => {
                         {...field}
                         type="email"
                         placeholder="Enter your email address"
-                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 
+                        dark:focus:ring-emerald-500 dark:focus:border-emerald-500
+                        focus:z-10 sm:text-sm"
                       />
                     </FormControl>
                     <FormMessage />
@@ -129,12 +131,14 @@ const Login = () => {
                           {...field}
                           type={showPassword ? "text" : "password"}
                           placeholder="Enter your password"
-                          className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                          className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300  placeholder-gray-500 text-gray-900 dark:text-gray-200 focus:outline-none  focus:ring-emerald-500 focus:border-emerald-500
+                           dark:focus:ring-emerald-500 dark:focus:border-emerald-500
+                          focus:z-10 sm:text-sm"
                         />
                       </FormControl>
                       <button
                         type="button"
-                        className="absolute right-3 top-2 text-gray-500 hover:text-emerald-600"
+                        className="absolute right-3 top-2 text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-500"
                         onMouseDown={(e) => {
                           e.preventDefault();
                           setShowPassword((prev) => !prev);
@@ -152,32 +156,21 @@ const Login = () => {
                 )}
               />
 
-              {/* Forgot password link */}
-              <div className="flex items-center justify-between">
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-medium text-emerald-600 hover:text-emerald-700"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
-              </div>
-
               <div>
                 <Button
                   type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  bg-emerald-600 hover:bg-emerald-700  focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-emerald-500
+                  "
                   disabled={isLoading}
                 >
-                  {isLoading ? <Loader2 className="animate-spin" /> : "Submit"}
+                  {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
                 </Button>
               </div>
 
               <p className="mt-2 text-center max-w">
                 <Link
                   to="/signup"
-                  className="font-medium text-emerald-600 hover:text-emerald-700"
+                  className="font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-600"
                 >
                   Create a new account
                 </Link>
