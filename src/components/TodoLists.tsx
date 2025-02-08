@@ -78,7 +78,7 @@ const TodoLists = () => {
     const getTodos = async () => {
       try {
         const data = await fetchTodos(userInfo.token, navigate, dispatch);
-        setTodos(data);
+        setTodos(data ?? []);
       } catch (error) {
         console.log("Error fetching data", error);
       } finally {

@@ -4,12 +4,43 @@ import { logout } from "@/store/slices/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 
+// Handle network errors
+const handleNetworkError = (error: Error) => {
+  if (!navigator.onLine) {
+    toast.error("Network error!", {
+      description: "You are offline. Please check your internet connection.",
+    });
+  } else {
+    toast.error("Failed to process request", {
+      description: "Please try again!",
+    });
+  }
+  throw error;
+};
+
+// Handle 401 errors
+const handleUnauthorizedError = (
+  res: Response,
+  dispatch: Dispatch,
+  navigate: NavigateFunction
+) => {
+  if (res.status === 401) {
+    dispatch(logout());
+    navigate("/login");
+    toast.error("Session expired!", {
+      description: "Please login again!",
+    });
+    return true;
+  }
+  return false;
+};
+
 // Fetch todos from the API
 export const fetchTodos = async (
   token: string,
   navigate: NavigateFunction,
   dispatch: Dispatch
-): Promise<Todo[]> => {
+): Promise<Todo[] | undefined> => {
   try {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/todos`, {
       headers: {
@@ -18,26 +49,11 @@ export const fetchTodos = async (
       },
     });
 
-    if (res.status === 401) {
-      dispatch(logout());
-      navigate("/login");
-      toast.error("Session expired!", {
-        description: "Please login again!",
-      });
-    }
+    if (handleUnauthorizedError(res, dispatch, navigate)) return;
 
     return res.json();
   } catch (error) {
-    if (!navigator.onLine) {
-      toast.error("Network error!", {
-        description: "You are offline. Please check your internet connection.",
-      });
-    } else {
-      toast.error("Failed to fetch todos", {
-        description: "Please try again!",
-      });
-    }
-    throw error;
+    handleNetworkError(error as Error);
   }
 };
 
@@ -60,15 +76,7 @@ export const addTodos = async (
       body: JSON.stringify({ title, dueDate, description }),
     });
 
-    if (res.status === 401) {
-      dispatch(logout());
-      navigate("/login");
-      toast.error("Session expired!", {
-        description: "Please login again!",
-      });
-
-      return;
-    }
+    if (handleUnauthorizedError(res, dispatch, navigate)) return;
 
     if (res.status === 409) {
       toast.error("Duplicate Todo", {
@@ -80,16 +88,7 @@ export const addTodos = async (
 
     return res.json();
   } catch (error) {
-    if (!navigator.onLine) {
-      toast.error("Network error!", {
-        description: "You are offline. Please check your internet connection.",
-      });
-    } else {
-      toast.error("Failed to create todo", {
-        description: "Please try again!",
-      });
-    }
-    throw error;
+    handleNetworkError(error as Error);
   }
 };
 
@@ -108,15 +107,7 @@ export const fetchTodoById = async (
       },
     });
 
-    if (res.status === 401) {
-      dispatch(logout());
-      navigate("/login");
-      toast.error("Session expired!", {
-        description: "Please login again!",
-      });
-
-      return;
-    }
+    if (handleUnauthorizedError(res, dispatch, navigate)) return;
 
     if (res.status === 404) {
       toast.error("Todo not found!", {
@@ -128,16 +119,7 @@ export const fetchTodoById = async (
 
     return res.json();
   } catch (error) {
-    if (!navigator.onLine) {
-      toast.error("Network error!", {
-        description: "You are offline. Please check your internet connection.",
-      });
-    } else {
-      toast.error("Failed to fetch todo", {
-        description: "Please try again!",
-      });
-    }
-    throw error;
+    handleNetworkError(error as Error);
   }
 };
 
@@ -157,15 +139,7 @@ export const deleteTodoById = async (
       },
     });
 
-    if (res.status === 401) {
-      dispatch(logout());
-      navigate("/login");
-      toast.error("Session expired!", {
-        description: "Please login again!",
-      });
-
-      return;
-    }
+    if (handleUnauthorizedError(res, dispatch, navigate)) return;
 
     if (res.status === 404) {
       toast.error("Todo not found!", {
@@ -181,16 +155,7 @@ export const deleteTodoById = async (
       });
     }
   } catch (error) {
-    if (!navigator.onLine) {
-      toast.error("Network error!", {
-        description: "You are offline. Please check your internet connection.",
-      });
-    } else {
-      toast.error("Failed to delete todo", {
-        description: "Please try again!",
-      });
-    }
-    throw error;
+    handleNetworkError(error as Error);
   }
 };
 
@@ -218,15 +183,7 @@ export const updateTodoById = async (
       }),
     });
 
-    if (res.status === 401) {
-      dispatch(logout());
-      navigate("/login");
-      toast.error("Session expired!", {
-        description: "Please login again!",
-      });
-
-      return;
-    }
+    if (handleUnauthorizedError(res, dispatch, navigate)) return;
 
     if (res.status === 404) {
       toast.error("Todo not found!", {
@@ -258,15 +215,6 @@ export const updateTodoById = async (
 
     return res.json();
   } catch (error) {
-    if (!navigator.onLine) {
-      toast.error("Network error!", {
-        description: "You are offline. Please check your internet connection.",
-      });
-    } else {
-      toast.error("Failed to update todo", {
-        description: "Please try again!",
-      });
-    }
-    throw error;
+    handleNetworkError(error as Error);
   }
 };
