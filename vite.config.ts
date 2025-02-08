@@ -12,7 +12,7 @@ const vitestConfig = defineVitestConfig({
     clearMocks: true,
     include: [
       "tests/unit/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
-      "src/**/*.spec.ts",
+      "src/**/*.spec.tsx",
     ],
     setupFiles: ["./src/testSetup.ts"],
     coverage: {
