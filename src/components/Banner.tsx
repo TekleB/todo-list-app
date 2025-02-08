@@ -4,7 +4,7 @@ import { Moon, Sun, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/slices/authSlice";
-import { UserInfo } from "@/types/index";
+import { UserInfo } from "@/types";
 
 const Banner = ({
   title = "Master Your Day, One Task at a Time!",

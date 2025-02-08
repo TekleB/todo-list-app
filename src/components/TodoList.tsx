@@ -6,14 +6,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
-interface Todo {
-  id: string;
-  title: string;
-  description: string;
-  status: boolean;
-  "Due Date": string;
-}
+import { Todo } from "@/types";
+import { format } from "date-fns";
 
 const TodoList = ({ todo }: { todo: Todo }) => {
   return (
@@ -21,7 +15,9 @@ const TodoList = ({ todo }: { todo: Todo }) => {
       <div className="p-4">
         <div className="mb-6 flex flex-row justify-between items-center">
           <h3
-            className={`text-xl font-bold ${todo.status ? "line-through" : ""}`}
+            className={`text-xl font-bold ${
+              !todo.status ? "line-through" : ""
+            }`}
           >
             {todo.title}
           </h3>
@@ -29,14 +25,14 @@ const TodoList = ({ todo }: { todo: Todo }) => {
             <Tooltip>
               <div className="text-gray-600 my-2">
                 <TooltipTrigger>
-                  {todo.status ? (
+                  {!todo.status ? (
                     <SquareCheckBigIcon className="text-emerald-500" />
                   ) : (
                     <HourglassIcon className="text-orange-500" />
                   )}
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{todo.status ? "Completed" : "Pending"}</p>
+                  <p>{!todo.status ? "Completed" : "Pending"}</p>
                 </TooltipContent>
               </div>
             </Tooltip>
@@ -51,14 +47,18 @@ const TodoList = ({ todo }: { todo: Todo }) => {
 
         <div className="flex flex-col  justify-between mb-4">
           <div className="text-gray-600 mb-3 font-extralight tracking-wide">
-            <span className="font-medium">Due Date </span>
-            {todo["Due Date"]}
+            <span className="font-medium">Due Date :- </span>
+            {format(new Date(todo.dueDate), "EEEE, dd, yyyy 'at' ha")}
+          </div>
+          <div className="text-gray-600 mb-3 font-extralight tracking-wide">
+            <span className="font-medium">Updated At :- </span>
+            {format(new Date(todo.updatedAt), "EEEE, dd, yyyy 'at' ha")}
           </div>
           <Link
             to={`/todos/${todo.id}`}
             className="h-[36px] bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-center text-sm"
           >
-            Read More
+            View detail
           </Link>
         </div>
       </div>

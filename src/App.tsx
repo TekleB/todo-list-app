@@ -4,7 +4,7 @@ import HomePage from "@/pages/HomePage";
 import Login from "@/pages/Login";
 import SignUp from "@/pages/SignUp";
 import TodoListPage from "@/pages/TodoListPage";
-import ProtectedLayout from "@/layouts/protectedLayout";
+import ProtectedLayout from "@/layouts/ProtectedLayout";
 
 const App = () => {
   return (

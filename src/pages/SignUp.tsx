@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { useSelector } from "react-redux";
 import { useRegisterMutation } from "@/store/slices/userApiSlice";
-import { UserInfo } from "@/types/index";
+import { UserInfo } from "@/types";
 import { toast } from "sonner";
 
 // Define the schema for form validation using zod

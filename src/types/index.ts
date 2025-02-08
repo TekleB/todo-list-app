@@ -11,3 +11,14 @@ export interface ApiError {
   messages?: string[];
   data?: string;
 }
+
+export interface Todo {
+  id: string;
+  title: string;
+  status: boolean;
+  dueDate: string;
+  description: string;
+  updatedAt: string
+}
+
+export type UpdateAPIAction  = 'mark' | 'update'
